@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  smart_stock:
+    container_name: grandela_smart_stock
+    image: postgres:14.0
+    environment:
+      POSTGRES_USER: dockerdev
+      POSTGRES_PASSWORD: dockerdev
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data-postgres:/var/lib/postgresql/data
