@@ -8,10 +8,18 @@ class ProductModel(
     val id: Long,
     val price: BigDecimal,
     val name: String,
-    val quantity: Long = 0,
+    val quantity: Long,
     val expirationAt: LocalDate?,
     val createdAt: LocalDate?,
-    val updatedAt: LocalDate?
+    val updatedAt: LocalDate?,
+    val code: String,
+    val codebarra: String ,
+    val image: String ,
+    val ivaTax: BigDecimal,
+    val discount: BigDecimal ,
+    val othorTax: BigDecimal,
+    val stock: Long ,
+    val category: CategoryModel
 ) {
 
   constructor(
@@ -23,6 +31,14 @@ class ProductModel(
       model.quantity,
       model.expirationAt,
       model.createdAt,
-      model.updatedAt
+      model.updatedAt,
+      model.code,
+    model.codebarra ,
+    model.image ,
+    model.ivaTax,
+    model.discount ,
+    model.othorTax,
+    model.stock  ,
+    CategoryModel(model.category)
   )
 }
