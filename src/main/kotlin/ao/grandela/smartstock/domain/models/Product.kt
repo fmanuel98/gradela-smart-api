@@ -29,6 +29,7 @@ data class Product(
 ) {
     constructor(id: Long, categoryId: Long) : this(id = id, category = Category(categoryId))
     constructor(id: Long) : this(id, 0)
+    constructor() : this(0)
 }
 
 @ApplicationScoped class ProductRepository : PanacheRepository<Product> {}
