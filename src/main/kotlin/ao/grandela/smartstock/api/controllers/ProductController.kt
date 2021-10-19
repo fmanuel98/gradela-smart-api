@@ -8,8 +8,10 @@ import javax.validation.Valid
 import javax.ws.rs.GET
 import javax.ws.rs.POST
 import javax.ws.rs.Path
+import org.eclipse.microprofile.openapi.annotations.tags.Tag
 
 @Path("products")
+@Tag(name = "Produtos")
 class ProductController(val repository: ProductRepository) {
   @GET fun listar() = repository.listAll().map { ProductModel(it) }
 

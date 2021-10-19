@@ -1,6 +1,6 @@
 package ao.grandela.smartstock.domain.models
 
-import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepositoryBase
+import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepository
 import java.math.BigDecimal
 import java.time.LocalDate
 import javax.enterprise.context.ApplicationScoped
@@ -14,7 +14,7 @@ data class Product(
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY) val id: Long = 0,
         @Column(nullable = false) val price: BigDecimal = BigDecimal.ZERO,
         @Column(nullable = false) val name: String = "",
-        val quantity: Long = 0,
+        var quantity: Long = 0,
         val expirationAt: LocalDate? = null,
         val code: String = "",
         val codebarra: String = "",
@@ -28,7 +28,7 @@ data class Product(
         @Column(nullable = false) @UpdateTimestamp val updatedAt: LocalDate? = null,
 ) {
     constructor(id: Long, categoryId: Long) : this(id = id, category = Category(categoryId))
-    constructor() : this(0,0)
+    constructor(id: Long) : this(id, 0)
 }
 
-@ApplicationScoped class ProductRepository : PanacheRepositoryBase<Product, Long>
+@ApplicationScoped class ProductRepository : PanacheRepository<Product> {}
