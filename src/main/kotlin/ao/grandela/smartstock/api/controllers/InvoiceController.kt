@@ -1,5 +1,8 @@
 package ao.grandela.smartstock.api.controllers
 
+import ao.grandela.smartstock.api.models.CustomerModel
+import ao.grandela.smartstock.api.models.InvoiceModel
+import ao.grandela.smartstock.api.models.ItemModel
 import ao.grandela.smartstock.api.models.inputs.InvoiceInput
 import ao.grandela.smartstock.domain.models.Invoice
 import ao.grandela.smartstock.domain.models.InvoiceRepository
@@ -19,7 +22,18 @@ class InvoiceController(
     val productService: ProductService,
     val customerService: CustomerService
 ) {
-  @GET fun listar() = repository.listAll().map { it }
+  @GET
+  fun listar() =
+      repository.listAll().map {
+        InvoiceModel(
+            it.id,
+            it.itens?.map { ItemModel(it) },
+            CustomerModel(it.customer),
+            it.total,
+            it.createdAt,
+            it.updatedAt
+        )
+      }
 
   @POST
   @Transactional

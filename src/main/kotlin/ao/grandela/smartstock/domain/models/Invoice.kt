@@ -13,27 +13,24 @@ import org.hibernate.annotations.UpdateTimestamp
 data class Invoice(
                 @Id @GeneratedValue(strategy = GenerationType.IDENTITY) val id: Long = 0,
                 @OneToMany(mappedBy = "invoice", cascade = [CascadeType.MERGE, CascadeType.PERSIST])
-                var itens: List<Item>,
+                var itens: List<Item>? = null,
                 @ManyToOne(optional = false) val customer: Customer,
-                var total: BigDecimal = BigDecimal.ZERO,
+                var total: BigDecimal? = BigDecimal.ZERO,
                 @Column(updatable = false) @CreationTimestamp val createdAt: LocalDate? = null,
                 @Column(nullable = false) @UpdateTimestamp val updatedAt: LocalDate? = null
 ) {
         constructor(
                         custumerId: Long,
-                        itens: List<Item>
+                        itens: List<Item>?
         ) : this(customer = Customer(custumerId), itens = itens)
-
+        constructor() : this(0, null)
         @PreUpdate
         @PrePersist
         fun calcularTotal() {
                 this.total =
-                                itens
-                                                .map { it.total() }
-                                                .reduce { accumulator, subTotal ->
-                                                        accumulator.add(subTotal)
-                                                }
-                                                .also { print("Total fatura $it") }
+                                itens?.map { it.total() }?.reduce { accumulator, subTotal ->
+                                        accumulator.add(subTotal)
+                                }
         }
 }
 
@@ -42,7 +39,7 @@ class InvoiceRepository : PanacheRepository<Invoice> {
 
         fun salvar(invoice: Invoice): Invoice {
                 val invoiceProcess = invoice
-                invoiceProcess.itens.forEach {
+                invoiceProcess.itens?.forEach {
                         it.invoice = invoiceProcess
                         it.product = checkStock(it)
                 }
@@ -50,13 +47,13 @@ class InvoiceRepository : PanacheRepository<Invoice> {
                 return invoiceProcess
         }
 
-        fun checkStock(item: Item): Product {
+        fun checkStock(item: Item): Product? {
                 val product = item.product
-                val quantidadeDisponivel = product.quantity
+                val quantidadeDisponivel = product?.quantity ?: 0
                 val quantidadeDesejada = item.quantity
                 val quantidadeRestante = quantidadeDisponivel - quantidadeDesejada
                 if (quantidadeRestante < 0) {}
-                product.quantity = quantidadeRestante
+                product?.quantity = quantidadeRestante
                 return product
         }
 }
