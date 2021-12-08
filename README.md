@@ -64,6 +64,6 @@ docker-compose up -d && mvn compile quarkus:dev
 
 Se tudo deu certo devera aparecer uma imagem semelhante a que esta abaixo
 
-Ou podes ver na tudo na999999999 **[Heroku](https://gradela-smart-stock.herokuapp.com/q/swagger-ui/)**
+Ou podes ver na tudo na **[Heroku](https://gradela-smart-stock.herokuapp.com/q/swagger-ui/)**
 
 ![as](api.png)
