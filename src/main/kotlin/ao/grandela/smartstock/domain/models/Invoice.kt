@@ -16,6 +16,7 @@ data class Invoice(
                 var itens: List<Item>? = null,
                 @ManyToOne(optional = false) val customer: Customer,
                 var total: BigDecimal? = BigDecimal.ZERO,
+                val InvoiceType: String = "",
                 @Column(updatable = false) @CreationTimestamp val createdAt: LocalDate? = null,
                 @Column(nullable = false) @UpdateTimestamp val updatedAt: LocalDate? = null
 ) {
@@ -47,7 +48,7 @@ class InvoiceRepository : PanacheRepository<Invoice> {
                 return invoiceProcess
         }
 
-        fun checkStock(item: Item): Product? {
+        private fun checkStock(item: Item): Product? {
                 val product = item.product
                 val quantidadeDisponivel = product?.quantity ?: 0
                 val quantidadeDesejada = item.quantity

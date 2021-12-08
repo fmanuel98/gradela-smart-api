@@ -7,6 +7,7 @@ import javax.transaction.Transactional
 import javax.validation.Valid
 import javax.ws.rs.GET
 import javax.ws.rs.POST
+import javax.ws.rs.PUT
 import javax.ws.rs.Path
 import javax.ws.rs.PathParam
 import org.eclipse.microprofile.openapi.annotations.tags.Tag
@@ -23,7 +24,7 @@ class CategoryController(val repository: CategoryRepository) {
     repository.persist(category)
     return CategoryModel(category)
   }
-  @POST
+  @PUT
   @Path("{categoriaId}")
   @Transactional
   fun atualizar(

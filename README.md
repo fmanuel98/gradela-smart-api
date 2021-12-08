@@ -1,15 +1,69 @@
-# graphql-kotlin-quarkus Project
+# Smart-stock
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+Este projecto foi desenvolvido usando **[Quarkus](https://quarkus.io/)**, um Java Framework Supersonic e Subatomic como esta definido no site dele.
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+## Sobre
 
-## Running the application in dev mode
+**smart-stock** é uma **REST API** desenvolvida com quarkus with usando a linguafem **kotlin** e outras tecnologia em volta do **Java EE** e **MicroProfile** como :
 
-You can run your application in dev mode that enables live coding using:
+- JPA e Hibernate
+- OPEN-API e SWAGGER
+- CDI e JAX-RS
+- JDBC - POSTGRES e BEAV VALIDATION
+
+### Outros
+
+- DOCKER
+- DOCKER-COMPOSE
+- POSTGRESQL
+- KOTLIN
+
+## Requisitos Para rodar a aplicação
+
+- JAVA 11
+- DOCKE e DOCKER COMPOSE
+- MAVEN 3.8.1
+
+## Como Rodar a Aplicação
+
+## 1ª
+
+Clone o repositório com o camando abaixo **tens de ter o git instalado na sua maquina**
 
 ```shell script
-docker-compose up -d && ./mvnw compile quarkus:dev
+git clone https://github.com/fmanuel98/gradela-smart-api
+
 ```
 
-> **_NOTE:_** Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+## 2º
+
+Depois mude de diretório usando o comando abaixo
+
+```shell script
+cd gradela-smart-api
+
+```
+
+## 3º
+
+por ultimo rode a aplicação usando o comando a baixo
+
+```shell script
+docker-compose up -d && mvn compile quarkus:dev
+```
+
+### Para ver o APP rodando
+
+4º Abra o seu browser e acessa as urls abaixo
+
+> **_NOTE:_** essa url dará acesso a Dev UI, Que esta disponivel em dev Mode http://localhost:8080/q/dev/.
+
+> **Link do Swagger-UI** http://localhost:8080/q/swagger-ui/
+
+## Finalmente
+
+Se tudo deu certo devera aparecer uma imagem semelhante a que esta abaixo
+
+Ou podes ver na tudo na999999999 **[Heroku](https://gradela-smart-stock.herokuapp.com/q/swagger-ui/)**
+
+![as](api.png)
